@@ -1,0 +1,30 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: scheduler_notification_service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3309/scheduler
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQLDialect
+      show_sql: true
+      format_sql: true
+      use_sql_comments: true
+      hbm2ddl.auto: update
+    show-sql: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: schedule-notification-group
+      auto-offset-reset: earliest
+  quartz:
+    job-store-type: memory
+
+scheduler:
+  topic:
+    create-task-schedule: create-task-scheduler-notification-event
+    create-goal-expiry-schedule: create-goal-expiry-notification
